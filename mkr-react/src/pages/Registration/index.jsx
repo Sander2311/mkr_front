@@ -1,6 +1,8 @@
 // Registration.js
 import React, { useState } from 'react';
+import { fetchRegister } from '../../fetch';
 import styles from './Registration.module.scss';
+
 
 export const Registration = () => {
   // State для зберігання значень полів форми
@@ -38,7 +40,7 @@ export const Registration = () => {
   };
 
   // Функція для обробки подання форми
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Перевіряємо, чи всі поля заповнені
@@ -46,7 +48,11 @@ export const Registration = () => {
 
     if (isFormValid) {
       // Ваш код для обробки подання форми тут
-      console.log('Submitted:', formData);
+      const data = await fetchRegister(formData);
+      if (data) {
+        console.log(data.user);
+      }
+      
 
         setFormData({
             firstName: '',
