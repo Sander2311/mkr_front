@@ -1,10 +1,12 @@
 // Registration.js
 import React, { useState } from 'react';
-import { fetchRegister } from '../../fetch';
+import { Navigate } from 'react-router-dom';
+import { fetchAuthMe, fetchRegister } from '../../fetch';
 import styles from './Registration.module.scss';
 
 
 export const Registration = () => {
+  const [isAuth, setIsAuth] = React.useState(null);
   // State для зберігання значень полів форми
   const [formData, setFormData] = useState({
     firstName: '',
@@ -49,11 +51,11 @@ export const Registration = () => {
     if (isFormValid) {
       // Ваш код для обробки подання форми тут
       const data = await fetchRegister(formData);
-      if (data) {
-        console.log(data.user);
+      if (data.token) {
+         window.localStorage.setItem('token', data.token);
       }
-      
-
+      const authMe = await fetchAuthMe();
+      setIsAuth(authMe)
         setFormData({
             firstName: '',
             lastName: '',
@@ -66,6 +68,10 @@ export const Registration = () => {
       console.log('Form contains errors. Please fill in all required fields.');
     }
   };
+
+  if (isAuth) {
+        return <Navigate to="/" />
+  }
 
   return (
     <div className={styles.registrationForm_wrapper}>

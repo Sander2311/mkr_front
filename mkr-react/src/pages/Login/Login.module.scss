@@ -1,6 +1,4 @@
-// ./Registration.module.scss
-
-.registrationForm_wrapper{
+.loginForm_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center; // Це вирівнює елементи по центру по вертикалі
@@ -8,7 +6,7 @@
     margin-top: 5em;
 }
 
-.registrationForm {
+.loginForm {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;

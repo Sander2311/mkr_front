@@ -1,0 +1,39 @@
+// Header.scss
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(49, 45, 45);
+    color: white;
+    height: 3em;
+
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+
+        .loginButton,
+        .registerButton {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #4caf50;
+            /* Замініть цей колір на потрібний вам */
+            color: white;
+            font-size: 14px;
+
+            &.registerButton {
+                background-color: #3498db;
+                /* Замініть цей колір на потрібний вам */
+            }
+        }
+    }
+}
