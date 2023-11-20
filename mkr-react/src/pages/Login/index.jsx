@@ -42,7 +42,6 @@ const [isAuth, setIsAuth] = React.useState(null);
     };
     
     if(isAuth) {
-        console.log(isAuth.role)
         return <Navigate to="/" />
   }
 

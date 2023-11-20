@@ -35,10 +35,13 @@ const CreateCourse = () => {
 
       formData.teachers = [teacher]
 
-    const newCourse = await fetchCreateCourse(formData)
+    await fetchCreateCourse(formData)
       
-    console.log(newCourse);
-
+    setFormData({
+    title: '',
+    teachers: '', 
+    groups: '',
+  })
     
   };
 
@@ -46,7 +49,7 @@ const CreateCourse = () => {
     <div className={styles.createCourseWrapper}>
       <div className={styles.createCourse}>
         <h2>Новий курс</h2>
-        <form onSubmit={handleSubmit}>
+        <form >
           <label>
             Назва курсу:
             <input
@@ -85,8 +88,8 @@ const CreateCourse = () => {
               required
             />
           </label>
-          <button type="submit">Створити</button>
         </form>
+        <button type="submit" onClick={handleSubmit}>Створити</button>
       </div>
     </div>
   );

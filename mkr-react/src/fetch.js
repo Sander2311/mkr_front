@@ -52,3 +52,36 @@ export const fetchCreateCourse = async (params) => {
     }
     
 };
+
+export const fetchGetAllCourses = async () => {
+    try {
+        const { data } = await axiosInstance.get('/courses/');
+    return data;
+    } catch (err) {
+        console.error(err)
+        return null;
+    }
+    
+};
+
+export const fetchCreateGroup = async (params) => {
+    try {
+        const { data } = await axiosInstance.post('/groups/', params);
+    return data;
+    } catch (err) {
+        console.error(err)
+        return null;
+    }
+    
+};
+
+export const fetchGetAllGroups = async () => {
+    try {
+        const { data } = await axiosInstance.get('/groups/');
+    return data;
+    } catch (err) {
+        console.error(err)
+        return null;
+    }
+    
+};

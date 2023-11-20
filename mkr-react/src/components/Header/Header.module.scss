@@ -20,6 +20,7 @@
         gap: 10px;
 
         .loginButton,
+        .logOutButton,
         .registerButton {
             padding: 8px 16px;
             border: none;
@@ -34,6 +35,10 @@
                 background-color: #3498db;
                 /* Замініть цей колір на потрібний вам */
             }
+                        &.logOutButton {
+                            background-color: #d12727;
+                            /* Замініть цей колір на потрібний вам */
+                        }
         }
     }
 }
