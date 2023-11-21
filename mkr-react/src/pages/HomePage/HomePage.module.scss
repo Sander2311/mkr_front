@@ -25,6 +25,16 @@
 .main{
     background-color: #f8f8f8;
     width: 85%;
+
+    .groupsBlock{
+        display: flex;
+        gap: 2em;
+        flex-wrap: wrap;
+    }
+
+    .studentsBlock{
+        margin: 1em auto;
+    }
 }
 
 .sidebar{

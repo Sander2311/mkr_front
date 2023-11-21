@@ -1,87 +1,111 @@
 import axiosInstance from "./axios.js";
 
 export const fetchRegister = async (params) => {
-    try {
-        const { data } = await axiosInstance.post('/auth/register', params);
+  try {
+    const { data } = await axiosInstance.post("/auth/register", params);
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchLogin = async (params) => {
-    try {
-        const { data } = await axiosInstance.post('/auth/login', params);
+  try {
+    const { data } = await axiosInstance.post("/auth/login", params);
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchAuthMe = async () => {
-    try {
-        const { data } = await axiosInstance.get('/users/me');
+  try {
+    const { data } = await axiosInstance.get("/users/me");
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }  
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchTeachers = async () => {
-    try {
-        const { data } = await axiosInstance.get('/users/teachers');
+  try {
+    const { data } = await axiosInstance.get("/users/teachers");
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }  
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchStudents = async () => {
+  try {
+    const { data } = await axiosInstance.get("/users/students");
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchCreateCourse = async (params) => {
-    try {
-        const { data } = await axiosInstance.post('/courses/', params);
+  try {
+    const { data } = await axiosInstance.post("/courses/", params);
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchGetAllCourses = async () => {
-    try {
-        const { data } = await axiosInstance.get('/courses/');
+  try {
+    const { data } = await axiosInstance.get("/courses/");
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchGetCoursesById = async (id) => {
+  try {
+    const { data } = await axiosInstance.get(`/courses/${id}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchCreateGroup = async (params) => {
-    try {
-        const { data } = await axiosInstance.post('/groups/', params);
+  try {
+    const { data } = await axiosInstance.post("/groups/", params);
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 export const fetchGetAllGroups = async () => {
-    try {
-        const { data } = await axiosInstance.get('/groups/');
+  try {
+    const { data } = await axiosInstance.get("/groups/");
     return data;
-    } catch (err) {
-        console.error(err)
-        return null;
-    }
-    
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchUpdateStudentGroup = async (params, id) => {
+  try {
+    const { data } = await axiosInstance.patch(`/users/${id}`, params);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };

@@ -1,0 +1,41 @@
+.studentItem{
+    display: flex;
+    margin: 1em auto;
+    gap: 0 2em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1em 2em;
+    width: 80%;
+
+    label{
+        margin-right: 10px;
+
+        select {
+                width: max-content;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-right: 10px;
+            }
+    }
+
+    button{
+        background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 2em;
+        
+            &:hover {
+                background-color: #2980b9;
+            }
+    }
+
+    .group{
+        margin-right: 1em;
+    }
+
+}

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGetAllGroups } from '../../fetch';
-import styles from './Groups.module.scss';
+import React, { useEffect, useState } from "react";
+import { fetchGetAllGroups } from "../../fetch";
+import styles from "./Groups.module.scss";
 
 const Groups = (me) => {
-
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -15,41 +14,42 @@ const Groups = (me) => {
     fetchGroupsData();
   }, []);
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
+  //   const handleChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setFormData({
+  //       ...formData,
+  //       [name]: value,
+  //     });
+  //   };
 
-//   const handleSubmit = async (e) => {
-//       e.preventDefault();
-      
-//       const teacher = formData.teachers
+  //   const handleSubmit = async (e) => {
+  //       e.preventDefault();
 
-//       formData.teachers = [teacher]
+  //       const teacher = formData.teachers
 
-//     await fetchCreateCourse(formData)
-      
-//     setFormData({
-//     title: '',
-//     teachers: '', 
-//     groups: '',
-//   })
-    
-//   };
+  //       formData.teachers = [teacher]
+
+  //     await fetchCreateCourse(formData)
+
+  //     setFormData({
+  //     title: '',
+  //     teachers: '',
+  //     groups: '',
+  //   })
+
+  //   };
 
   return (
-      <>
-         {groups.map((group) => (
-           <div key={group._id} className={styles.courseBlock}>
-             <h2>{group.groupName}</h2>
-             
-                </div>
-              ))}
-      </>
-    
+    <>
+      {groups.map((group) => (
+        <div key={group._id} className={styles.groupItem}>
+          <h2>{group.groupName}</h2>
+          <div>
+            <span>Кількість студентів: {group.studentsNumber}</span>
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 

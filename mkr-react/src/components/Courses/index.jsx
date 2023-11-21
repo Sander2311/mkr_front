@@ -1,55 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { fetchGetAllCourses } from '../../fetch';
-import styles from './Courses.module.scss';
+import React, { useEffect, useState } from "react";
+import { fetchGetAllCourses, fetchGetCoursesById } from "../../fetch";
+import styles from "./Courses.module.scss";
 
-const Courses = (me) => {
-
+const Courses = ({ me }) => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchCoursesData = async () => {
-      const courses = await fetchGetAllCourses();
-      setCourses(courses);
+      if (me.role === "admin") {
+        const courses = await fetchGetAllCourses();
+        setCourses(courses);
+      } else if (me.role === "teacher") {
+        const courses = await fetchGetCoursesById(me._id);
+        setCourses(courses);
+      }
     };
 
     fetchCoursesData();
   }, []);
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
+  //   const handleChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setFormData({
+  //       ...formData,
+  //       [name]: value,
+  //     });
+  //   };
 
-//   const handleSubmit = async (e) => {
-//       e.preventDefault();
-      
-//       const teacher = formData.teachers
+  //   const handleSubmit = async (e) => {
+  //       e.preventDefault();
 
-//       formData.teachers = [teacher]
+  //       const teacher = formData.teachers
 
-//     await fetchCreateCourse(formData)
-      
-//     setFormData({
-//     title: '',
-//     teachers: '', 
-//     groups: '',
-//   })
-    
-//   };
+  //       formData.teachers = [teacher]
+
+  //     await fetchCreateCourse(formData)
+
+  //     setFormData({
+  //     title: '',
+  //     teachers: '',
+  //     groups: '',
+  //   })
+
+  //   };
 
   return (
-      <>
-         {courses.map((course) => (
-           <div key={course._id} className={styles.courseBlock}>
-             <h2>{course.title}</h2>
-             <div>{`${course.teachers[0].firstName} ${course.teachers[0].lastName}` }</div>
-                </div>
-              ))}
-      </>
-    
+    <>
+      {courses.map((course) => (
+        <div key={course._id} className={styles.courseBlock}>
+          <h2 className={styles.title}>{course.title}</h2>
+          <div>
+            <div
+              className={styles.info}
+            >{`${course.teachers[0].firstName} ${course.teachers[0].lastName}`}</div>
+            <div className={styles.info}>{course.groups[0].groupName}</div>
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 
