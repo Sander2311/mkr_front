@@ -1,31 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import Courses from "../../components/Courses";
 import CreateCourse from "../../components/CreateCourse";
 import CreateGroup from "../../components/CreateGroup";
 import Groups from "../../components/Groups";
 import Students from "../../components/Students";
-import { fetchAuthMe } from "../../fetch";
-import styles from "./HomePage.module.scss";
+import { fetchAuthMe, fetchGetCourseById } from "../../fetch";
+import styles from "./CoursePage.module.scss";
 
-const HomePage = () => {
+const CoursePage = () => {
   const [me, setMe] = useState(null);
+  const { id } = useParams();
+  const [currentCourse, setCurrentCourse] = useState(null);
   const [sidebarValue, setSidebarValue] = useState("courses");
+  const [isCreateCourseVisible, setCreateCourseVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setCreateCourseVisible(!isCreateCourseVisible);
+  };
 
   useEffect(() => {
     const fetchMeData = async () => {
       const me = await fetchAuthMe();
       setMe(me);
     };
+
+    const fetchCourseData = async () => {
+      const course = await fetchGetCourseById(id);
+      setCurrentCourse(course);
+    };
+
+    fetchCourseData();
     fetchMeData();
   }, []);
 
   const handleButtonClickCourses = () => {
     setSidebarValue("courses");
-  };
-
-  const handleButtonClickCreateCourse = () => {
-    setSidebarValue("createCourse");
   };
 
   const handleButtonClickGroups = () => {
@@ -46,14 +56,24 @@ const HomePage = () => {
         <div className={styles.main}>
           {sidebarValue === "courses" && (
             <div>
+              {me && me.role !== "student" && (
+                <div className={styles.blockButtonCreateCourse}>
+                  <button
+                    onClick={handleButtonClick}
+                    className={styles.buttonCreateCourse}
+                  >
+                    {currentCourse && currentCourse.title}
+                  </button>
+                </div>
+              )}
+              {isCreateCourseVisible && (
+                <div className={styles.createCourseBlock}>
+                  <CreateCourse />
+                </div>
+              )}
               <div className={styles.coursesBlock}>
                 {me && <Courses me={me} />}
               </div>
-            </div>
-          )}
-          {me && me.role !== "student" && sidebarValue === "createCourse" && (
-            <div className={styles.createCourseBlock}>
-              <CreateCourse />
             </div>
           )}
 
@@ -77,21 +97,18 @@ const HomePage = () => {
             </div>
           )}
         </div>
-        <div className={styles.sidebar}>
+        {/* <div className={styles.sidebar}>
           <div onClick={handleButtonClickCourses}>Мої курси</div>
-          {me && me.role !== "student" && (
-            <div onClick={handleButtonClickCreateCourse}>Створити курс</div>
-          )}
           {me && me.role === "admin" && (
             <div onClick={handleButtonClickGroups}>Групи</div>
           )}
           {me && me.role !== "student" && (
             <div onClick={handleButtonClickStudents}>Студенти</div>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );
 };
 
-export default HomePage;
+export default CoursePage;

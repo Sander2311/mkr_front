@@ -4,7 +4,7 @@ $padding: 16px;
 $margin-bottom: 16px;
 $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $title-font-size: 1.5rem;
-$info-font-size: 1rem;
+$info-font-size: 1.5rem;
 
 .courseBlock {
     border: 1px solid $border-color;
@@ -16,15 +16,24 @@ $info-font-size: 1rem;
     h2 {
         font-size: $title-font-size;
         margin-bottom: 8px;
+        color: black;
+
+        .title{
+            color: black;
+        }
     }
 
     div {
         display: flex;
+        align-items: center;
         gap: 1rem;
         font-size: $info-font-size; 
 
         div{
-
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            padding: $padding;
+            box-shadow: $box-shadow;
         }
     }
 }

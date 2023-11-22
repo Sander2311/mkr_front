@@ -1,23 +1,24 @@
-import './App.css';
-import Header from './components/Header';
-import { Registration } from './pages/Registration';
-import {  Route, Routes } from "react-router-dom";
-import { Login } from './pages/Login';
-import React from 'react';
-import HomePage from './pages/HomePage';
+import "./App.css";
+import Header from "./components/Header";
+import { Registration } from "./pages/Registration";
+import { Route, Routes } from "react-router-dom";
+import { Login } from "./pages/Login";
+import React from "react";
+import HomePage from "./pages/HomePage";
+import CoursePage from "./pages/CoursePage";
 
 function App() {
   return (
     <>
       <Header />
-      <div className='mainBlock'>
+      <div className="mainBlock">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<Registration />} /> 
-          <Route path="/login" element={<Login />} /> 
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/course/:id" element={<CoursePage />} />
         </Routes>
       </div>
-      
     </>
   );
 }

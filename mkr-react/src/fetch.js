@@ -80,6 +80,27 @@ export const fetchGetCoursesById = async (id) => {
   }
 };
 
+export const fetchGetCourseById = async (id) => {
+  try {
+    const { data } = await axiosInstance.get(`/course/${id}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchGetCoursesByGroupId = async (groupId) => {
+  try {
+    console.log(groupId);
+    const { data } = await axiosInstance.get(`/courses/group/${groupId}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 export const fetchCreateGroup = async (params) => {
   try {
     const { data } = await axiosInstance.post("/groups/", params);

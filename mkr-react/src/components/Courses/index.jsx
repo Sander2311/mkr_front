@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fetchGetAllCourses, fetchGetCoursesById } from "../../fetch";
+import { Link } from "react-router-dom";
+import {
+  fetchGetAllCourses,
+  fetchGetCoursesByGroupId,
+  fetchGetCoursesById,
+} from "../../fetch";
 import styles from "./Courses.module.scss";
 
 const Courses = ({ me }) => {
@@ -12,6 +17,9 @@ const Courses = ({ me }) => {
         setCourses(courses);
       } else if (me.role === "teacher") {
         const courses = await fetchGetCoursesById(me._id);
+        setCourses(courses);
+      } else if (me.role === "student") {
+        const courses = await fetchGetCoursesByGroupId(me.group);
         setCourses(courses);
       }
     };
@@ -48,12 +56,21 @@ const Courses = ({ me }) => {
     <>
       {courses.map((course) => (
         <div key={course._id} className={styles.courseBlock}>
-          <h2 className={styles.title}>{course.title}</h2>
+          <h2>
+            <Link className={styles.title} to={`/course/${course._id}`}>
+              {course.title}
+            </Link>
+          </h2>
           <div>
-            <div
-              className={styles.info}
-            >{`${course.teachers[0].firstName} ${course.teachers[0].lastName}`}</div>
+            Викладач курсу:
+            <div className={styles.info}>
+              <img src={course.teachers[0].avatarUrl} width={45} height={45} />
+              {` ${course.teachers[0].firstName} ${course.teachers[0].lastName}`}
+            </div>
+            Група:
             <div className={styles.info}>{course.groups[0].groupName}</div>
+            Кількість студентів:
+            <div className={styles.info}>{course.groups[0].studentsNumber}</div>
           </div>
         </div>
       ))}
