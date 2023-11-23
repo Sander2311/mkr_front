@@ -1,45 +1,35 @@
-.blockButtonCreateCourse{
-    margin: 2ex auto;
-    width: max-content;
-}
+$border-color: #ddd;
+$border-radius: 8px;
+$padding: 16px;
+$margin-bottom: 16px;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$title-font-size: 1.5rem;
+$info-font-size: 1.5rem;
 
-.buttonCreateCourse {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 50px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 20px;
-
-    &:hover {
-        background-color: #2980b9;
-    }
-}
-
-.homePageWrraper{
+.coursePageWrraper {
     display: flex;
     flex-wrap: nowrap;
 }
 
-.main{
+.main {
     background-color: #f8f8f8;
     width: 85%;
+    padding-top: 1em;
 
-    .groupsBlock{
+    .groupsBlock {
         display: flex;
         gap: 2em;
         flex-wrap: wrap;
     }
 
-    .studentsBlock{
+    .studentsBlock {
         margin: 1em auto;
     }
 }
 
-.sidebar{
+.sidebar {
     background-color: #f1efef;
-    padding: 10px 5px;
+    padding: 15px 5px;
     width: 15%;
     font-size: 20px;
     font-weight: 500;
@@ -48,7 +38,7 @@
     align-items: center;
     box-sizing: border-box;
 
-    div{
+    div {
         cursor: pointer;
         text-align: center;
         width: 100%;
@@ -56,10 +46,46 @@
         border-radius: 4px;
         margin-bottom: 5px;
 
-        &:hover{
+        &:hover {
             background-color: #ccc;
         }
     }
 
 
+}
+
+.courseBlock {
+    border: 1px solid $border-color;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin-bottom: $margin-bottom;
+    box-shadow: $box-shadow;
+
+    h2 {
+        font-size: $title-font-size;
+        margin-bottom: 8px;
+        color: black;
+
+        .title {
+            color: black;
+        }
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: $info-font-size;
+
+        div {
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            padding: $padding;
+            box-shadow: $box-shadow;
+        }
+    }
 }

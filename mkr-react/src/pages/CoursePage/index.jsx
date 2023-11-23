@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import Courses from "../../components/Courses";
-import CreateCourse from "../../components/CreateCourse";
-import CreateGroup from "../../components/CreateGroup";
-import Groups from "../../components/Groups";
+import CreateMaterial from "../../components/CreateMaterial";
+import Materials from "../../components/Materials";
 import Students from "../../components/Students";
 import { fetchAuthMe, fetchGetCourseById } from "../../fetch";
 import styles from "./CoursePage.module.scss";
@@ -12,7 +10,7 @@ const CoursePage = () => {
   const [me, setMe] = useState(null);
   const { id } = useParams();
   const [currentCourse, setCurrentCourse] = useState(null);
-  const [sidebarValue, setSidebarValue] = useState("courses");
+  const [sidebarValue, setSidebarValue] = useState("materials");
   const [isCreateCourseVisible, setCreateCourseVisible] = useState(false);
 
   const handleButtonClick = () => {
@@ -34,8 +32,8 @@ const CoursePage = () => {
     fetchMeData();
   }, []);
 
-  const handleButtonClickCourses = () => {
-    setSidebarValue("courses");
+  const handleButtonClickMaterials = () => {
+    setSidebarValue("materials");
   };
 
   const handleButtonClickGroups = () => {
@@ -52,39 +50,38 @@ const CoursePage = () => {
 
   return (
     <>
-      <div className={styles.homePageWrraper}>
+      <div className={styles.coursePageWrraper}>
         <div className={styles.main}>
-          {sidebarValue === "courses" && (
-            <div>
-              {me && me.role !== "student" && (
-                <div className={styles.blockButtonCreateCourse}>
-                  <button
-                    onClick={handleButtonClick}
-                    className={styles.buttonCreateCourse}
-                  >
-                    {currentCourse && currentCourse.title}
-                  </button>
-                </div>
-              )}
-              {isCreateCourseVisible && (
-                <div className={styles.createCourseBlock}>
-                  <CreateCourse />
-                </div>
-              )}
-              <div className={styles.coursesBlock}>
-                {me && <Courses me={me} />}
-              </div>
+          <div className={styles.courseBlock}>
+            <h1>Тема курсу: {currentCourse && currentCourse.title}</h1>
+            <div className={styles.info}>
+              Викладач курсу:
+              <img
+                src={currentCourse && currentCourse.teachers[0].avatarUrl}
+                width={45}
+                height={45}
+              />
+              {` ${currentCourse && currentCourse.teachers[0].firstName} ${
+                currentCourse && currentCourse.teachers[0].lastName
+              }`}
             </div>
-          )}
 
-          {me && me.role === "admin" && sidebarValue === "groups" && (
+            <div className={styles.info}>
+              Група:
+              {currentCourse && currentCourse.groups[0].groupName}
+            </div>
+          </div>
+
+          {sidebarValue === "materials" && (
             <div>
               <div className={styles.createCourseBlock}>
-                <CreateGroup />
+                {me && me.role === "teacher" && currentCourse && (
+                  <CreateMaterial courseId={currentCourse._id} />
+                )}
               </div>
 
               <div className={styles.groupsBlock}>
-                {me && <Groups me={me} />}
+                {currentCourse && <Materials courseId={currentCourse._id} />}
               </div>
             </div>
           )}
@@ -97,15 +94,15 @@ const CoursePage = () => {
             </div>
           )}
         </div>
-        {/* <div className={styles.sidebar}>
-          <div onClick={handleButtonClickCourses}>Мої курси</div>
+        <div className={styles.sidebar}>
+          <div onClick={handleButtonClickMaterials}>Матеріали</div>
           {me && me.role === "admin" && (
             <div onClick={handleButtonClickGroups}>Групи</div>
           )}
           {me && me.role !== "student" && (
             <div onClick={handleButtonClickStudents}>Студенти</div>
           )}
-        </div> */}
+        </div>
       </div>
     </>
   );

@@ -1,0 +1,75 @@
+.materialItemWrapper{
+    width: 100%;
+}
+
+.materialItem{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    a{
+        display: block;
+        font-size: 20px;
+        font-weight: 500;
+        color:#001aff
+    }
+
+    div{
+        font-size: 20px;
+        font-weight: 400;
+        margin-left: auto;
+    }
+
+         input {
+             width: 300px;
+             font-size: 17px;
+             padding: 3px;
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             margin-right: 10px;
+         }
+
+                  button {
+                      padding: 6px 14px;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                      background-color: #3498db;
+                      color: white;
+                      font-size: 14px;
+                  }
+
+                                   .cencele {
+                                       background-color: #919090;
+
+                                       
+                                   }
+}
+
+ .buttons {
+    width: max-content;
+    margin: 0 auto;
+    display: flex;
+    gap: .5em;
+
+     button {
+         padding: 8px 16px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         background-color: #3498db;
+         color: white;
+         font-size: 14px;
+
+         &.delete {
+             background-color: #d12727;
+
+         }
+     }
+
+ }
