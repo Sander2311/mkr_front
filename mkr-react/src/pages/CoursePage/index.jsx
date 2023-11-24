@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
+import Chats from "../../components/Chats";
 import CreateMaterial from "../../components/CreateMaterial";
+import Criterias from "../../components/Criterias";
 import Materials from "../../components/Materials";
-import Students from "../../components/Students";
 import { fetchAuthMe, fetchGetCourseById } from "../../fetch";
 import styles from "./CoursePage.module.scss";
 
@@ -11,11 +12,6 @@ const CoursePage = () => {
   const { id } = useParams();
   const [currentCourse, setCurrentCourse] = useState(null);
   const [sidebarValue, setSidebarValue] = useState("materials");
-  const [isCreateCourseVisible, setCreateCourseVisible] = useState(false);
-
-  const handleButtonClick = () => {
-    setCreateCourseVisible(!isCreateCourseVisible);
-  };
 
   useEffect(() => {
     const fetchMeData = async () => {
@@ -36,12 +32,12 @@ const CoursePage = () => {
     setSidebarValue("materials");
   };
 
-  const handleButtonClickGroups = () => {
-    setSidebarValue("groups");
+  const handleButtonClickChats = () => {
+    setSidebarValue("chats");
   };
 
-  const handleButtonClickStudents = () => {
-    setSidebarValue("students");
+  const handleButtonClickCriteria = () => {
+    setSidebarValue("criteria");
   };
 
   if (!window.localStorage.getItem("token")) {
@@ -81,26 +77,38 @@ const CoursePage = () => {
               </div>
 
               <div className={styles.groupsBlock}>
-                {currentCourse && <Materials courseId={currentCourse._id} />}
+                {currentCourse && (
+                  <Materials courseId={currentCourse._id} me={me} />
+                )}
               </div>
             </div>
           )}
 
-          {me && me.role !== "student" && sidebarValue === "students" && (
+          {sidebarValue === "chats" && (
             <div>
-              <div className={styles.studentsBlock}>
-                {me && <Students me={me} />}
+              <div className={styles.chatsBlock}>
+                {me && currentCourse && (
+                  <Chats course={currentCourse} me={me} />
+                )}
+              </div>
+            </div>
+          )}
+
+          {sidebarValue === "criteria" && (
+            <div>
+              <div className={styles.chatsBlock}>
+                {me && currentCourse && (
+                  <Criterias course={currentCourse} me={me} />
+                )}
               </div>
             </div>
           )}
         </div>
         <div className={styles.sidebar}>
           <div onClick={handleButtonClickMaterials}>Матеріали</div>
-          {me && me.role === "admin" && (
-            <div onClick={handleButtonClickGroups}>Групи</div>
-          )}
-          {me && me.role !== "student" && (
-            <div onClick={handleButtonClickStudents}>Студенти</div>
+          <div onClick={handleButtonClickChats}>Чати</div>
+          {me && me.role === "teacher" && (
+            <div onClick={handleButtonClickCriteria}>Критерії оцінювання</div>
           )}
         </div>
       </div>

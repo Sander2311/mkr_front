@@ -6,7 +6,7 @@ import {
 } from "../../fetch.js";
 import styles from "./Materials.module.scss";
 
-const Materials = ({ courseId }) => {
+const Materials = ({ courseId, me }) => {
   const [materials, setMaterials] = useState([]);
   const [editMaterial, setEditMaterial] = useState(null);
   const [formData, setFormData] = useState({
@@ -96,7 +96,7 @@ const Materials = ({ courseId }) => {
               </div>
             )}
 
-            {editMaterial === material._id && (
+            {me && me.role === "teacher" && editMaterial === material._id && (
               <input
                 type="text"
                 name="title"
@@ -105,7 +105,7 @@ const Materials = ({ courseId }) => {
               />
             )}
 
-            {editMaterial === material._id && (
+            {me && me.role === "teacher" && editMaterial === material._id && (
               <input
                 type="text"
                 name="url"
@@ -114,12 +114,12 @@ const Materials = ({ courseId }) => {
               />
             )}
 
-            {editMaterial === material._id && (
+            {me && me.role === "teacher" && editMaterial === material._id && (
               <button onClick={(e) => handleUpdateMaterial(e, material._id)}>
                 Редагувати
               </button>
             )}
-            {editMaterial === material._id && (
+            {me && me.role === "teacher" && editMaterial === material._id && (
               <button
                 className={styles.cencele}
                 onClick={(e) => handleEditMaterial(e, material)}
@@ -129,7 +129,7 @@ const Materials = ({ courseId }) => {
             )}
           </div>
 
-          {editMaterial !== material._id && (
+          {me && me.role === "teacher" && editMaterial !== material._id && (
             <div className={styles.buttons}>
               <button
                 className={styles.edit}

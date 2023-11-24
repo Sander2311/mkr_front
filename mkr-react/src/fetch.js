@@ -50,6 +50,26 @@ export const fetchStudents = async () => {
   }
 };
 
+export const fetchStudentsByGroupId = async (groupId) => {
+  try {
+    const { data } = await axiosInstance.get(`/users/group/${groupId}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchUserById = async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(`/users/${userId}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 export const fetchCreateCourse = async (params) => {
   try {
     const { data } = await axiosInstance.post("/courses/", params);
@@ -121,6 +141,16 @@ export const fetchCreateMaterial = async (params) => {
   }
 };
 
+export const fetchCreateCriteria = async (params) => {
+  try {
+    const { data } = await axiosInstance.post("/criterias/", params);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 export const fetchGetAllGroups = async () => {
   try {
     const { data } = await axiosInstance.get("/groups/");
@@ -134,6 +164,16 @@ export const fetchGetAllGroups = async () => {
 export const fetchMaterialsByCourseId = async (id) => {
   try {
     const { data } = await axiosInstance.get(`/materials/${id}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchCriteriasByCourseId = async (id) => {
+  try {
+    const { data } = await axiosInstance.get(`/criterias/${id}`);
     return data;
   } catch (err) {
     console.error(err);
@@ -164,6 +204,29 @@ export const fetchUpdateMaterialById = async (params, id) => {
 export const fetchUpdateStudentGroup = async (params, id) => {
   try {
     const { data } = await axiosInstance.patch(`/users/${id}`, params);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchCreateMessage = async (params) => {
+  try {
+    const { data } = await axiosInstance.post("/messages/", params);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchMessagesByCourseId = async (courseId, query) => {
+  try {
+    const queryParams = new URLSearchParams(query);
+    const { data } = await axiosInstance.get(
+      `/messages/${courseId}?${queryParams}`
+    );
     return data;
   } catch (err) {
     console.error(err);
