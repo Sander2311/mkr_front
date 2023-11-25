@@ -4,6 +4,7 @@ import Chats from "../../components/Chats";
 import CreateMaterial from "../../components/CreateMaterial";
 import Criterias from "../../components/Criterias";
 import Materials from "../../components/Materials";
+import Results from "../../components/Results";
 import { fetchAuthMe, fetchGetCourseById } from "../../fetch";
 import styles from "./CoursePage.module.scss";
 
@@ -34,6 +35,10 @@ const CoursePage = () => {
 
   const handleButtonClickChats = () => {
     setSidebarValue("chats");
+  };
+
+  const handleButtonClickResults = () => {
+    setSidebarValue("results");
   };
 
   const handleButtonClickCriteria = () => {
@@ -103,6 +108,16 @@ const CoursePage = () => {
               </div>
             </div>
           )}
+
+          {sidebarValue === "results" && (
+            <div>
+              <div className={styles.chatsBlock}>
+                {me && currentCourse && (
+                  <Results course={currentCourse} me={me} />
+                )}
+              </div>
+            </div>
+          )}
         </div>
         <div className={styles.sidebar}>
           <div onClick={handleButtonClickMaterials}>Матеріали</div>
@@ -110,6 +125,7 @@ const CoursePage = () => {
           {me && me.role === "teacher" && (
             <div onClick={handleButtonClickCriteria}>Критерії оцінювання</div>
           )}
+          <div onClick={handleButtonClickResults}>Результати</div>
         </div>
       </div>
     </>

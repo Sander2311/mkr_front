@@ -181,6 +181,16 @@ export const fetchCriteriasByCourseId = async (id) => {
   }
 };
 
+export const fetchMarksByCourseId = async (id) => {
+  try {
+    const { data } = await axiosInstance.get(`/marks/${id}`);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
 export const fetchDeleteMaterialById = async (id) => {
   try {
     const { data } = await axiosInstance.delete(`/materials/${id}`);
@@ -204,6 +214,16 @@ export const fetchUpdateMaterialById = async (params, id) => {
 export const fetchUpdateStudentGroup = async (params, id) => {
   try {
     const { data } = await axiosInstance.patch(`/users/${id}`, params);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const fetchUpdateMark = async (params, id) => {
+  try {
+    const { data } = await axiosInstance.patch(`/marks/${id}`, params);
     return data;
   } catch (err) {
     console.error(err);
